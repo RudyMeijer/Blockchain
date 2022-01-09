@@ -6,3 +6,8 @@ blockchain.Add(new Block(new Transaction(from: "Henk", to: "Aniek", amount: -84.
 blockchain.Add(new Block(new Transaction(from: "Hari", to: "Zenaa", amount: 345.45)));
 
 foreach (var block in blockchain.blocks) Console.WriteLine(block);
+
+Console.WriteLine($"Blockchain.IsValid = {blockchain.IsValid()}");
+blockchain.blocks[1]._transaction.amount -= 0.00001;
+Console.WriteLine($"Tampered Blockchain.IsValid = {blockchain.IsValid()}");
+

@@ -10,5 +10,23 @@
         block._hash = block.CreateHash();
         blocks.Add(block);
     }
+    public bool IsValid()
+    {
+        var previousHash = "";
+        foreach (var block in blocks)
+        {
+            if (previousHash != block._previousHash) return false;
+            if (block._hash != block.CreateHash()) return false;
+            previousHash = block._hash;
+        }
+        return true;
+    }
 }
-class GenesisBlock : Block { }
+class GenesisBlock : Block
+{
+    public GenesisBlock()
+    {
+        _
+         _hash = CreateHash();
+    }
+}

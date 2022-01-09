@@ -25,5 +25,5 @@ internal class Block
         return Convert.ToBase64String(hash);
     }
 
-    public override string ToString() => $"{_timestamp} {_transaction} {_hash}";
+    public override string ToString() => $"{_timestamp} {_transaction} {_previousHash}";
 }
