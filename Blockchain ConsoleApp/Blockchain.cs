@@ -26,7 +26,6 @@ class GenesisBlock : Block
 {
     public GenesisBlock()
     {
-        _
          _hash = CreateHash();
     }
 }

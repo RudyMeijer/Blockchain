@@ -2,7 +2,7 @@
 {
     readonly string from;
     readonly string to;
-    public double amount;
+    readonly double amount;
 
     public Transaction(string from, string to, double amount)
     {
