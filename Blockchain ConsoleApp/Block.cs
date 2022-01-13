@@ -17,18 +17,6 @@ internal class Block
         _hash = "";
     }
 
-    internal void Mine(int difficulty)
-    {
-        var leadingZeros = new string('0', difficulty);
-        _hash = this.CreateHash();
-        while (leadingZeros != _hash[..difficulty])
-        {
-            _noune++;
-            _hash = CreateHash();
-            Console.WriteLine(_hash);
-        }
-    }
-
     public Block(Transaction transaction) : this() => _transaction = transaction;
 
     internal void Mine(int difficulty)
