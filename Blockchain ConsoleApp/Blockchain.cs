@@ -8,6 +8,7 @@
         block._timestamp = DateTime.UtcNow;
         block._previousHash = blocks.Last()._hash;
         block._hash = block.CreateHash();
+        block.Mine(difficulty: 2);
         blocks.Add(block);
     }
     public bool IsValid()
@@ -24,8 +25,5 @@
 }
 class GenesisBlock : Block
 {
-    public GenesisBlock()
-    {
-         _hash = CreateHash();
-    }
+    public GenesisBlock() => _hash = CreateHash();
 }
