@@ -1,8 +1,8 @@
 ﻿class Transaction
 {
-    readonly string from;
-    readonly string to;
-    readonly double amount;
+    public readonly string from;
+    public readonly string to;
+    public readonly double amount;
 
     public Transaction(string from, string to, double amount)
     {

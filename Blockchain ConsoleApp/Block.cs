@@ -1,25 +1,29 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-internal class Block
+class Block
 {
+    #region FIELDS
     public DateTime _timestamp;
-    public Transaction _transaction;
+    public List<Transaction> _transactions;
     public string _previousHash;
     public string _hash;
     public int _noune;
-
+    #endregion
+    
+    #region CONSTRUCTORS
     public Block()
     {
         _timestamp = DateTime.UtcNow;
-        _transaction = null!;
+        _transactions = new();
         _previousHash = "";
         _hash = "";
     }
 
-    public Block(Transaction transaction) : this() => _transaction = transaction;
+    public Block(List<Transaction> transactions) : this() => _transactions = new(transactions);
+    #endregion
 
-    internal void Mine(int difficulty)
+    public void Mine(int difficulty)
     {
         var leadingZeros = new string('0', difficulty);
         _hash = this.CreateHash();
@@ -33,11 +37,18 @@ internal class Block
 
     public string CreateHash()
     {
-        byte[] bytes = Encoding.UTF8.GetBytes($"{_timestamp} {_transaction} {_previousHash} {_noune}");
+        byte[] bytes = Encoding.UTF8.GetBytes($"{_timestamp} {Sum(_transactions)} {_previousHash} {_noune}");
         using SHA256 sha = SHA256.Create();
         byte[] hash = sha.ComputeHash(bytes);
         return Convert.ToBase64String(hash);
     }
 
-    public override string ToString() => $"{_timestamp} {_transaction} {_hash} {_noune}";
+    private static string Sum(List<Transaction> transactions)
+    {
+        var sum = "";
+        foreach (var transaction in transactions) sum += transaction + "\n\r                   ";
+        return sum;
+    }
+
+    public override string ToString() => $"{_timestamp} {Sum(_transactions)} {_hash} {_noune}";
 }
